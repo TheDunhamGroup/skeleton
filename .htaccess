@@ -1,7 +1,11 @@
 RewriteEngine on
 
+# Send all requests with query string to index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)
+
 # Send all requests to index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-
-RewriteRule ^(.*)$ index.php?url=$1 [PT,L]
+RewriteRule ^(.*)$ index.php?url=$1&%{QUERY_STRING} [PT,L]
